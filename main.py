@@ -1,9 +1,9 @@
-def on_button_pressed_a():
+def down():
     bird.change(LedSpriteProperty.Y, 1)
     print("Down")
-input.on_button_pressed(Button.A, on_button_pressed_a)
+input.on_button_pressed(Button.A, down)
 
-def on_button_pressed_ab():
+def pause():
     if game.is_paused():
         print("Play")
         basic.show_leds("""
@@ -26,14 +26,14 @@ def on_button_pressed_ab():
             . # . # .
             . . . . .
             """)
-input.on_button_pressed(Button.AB, on_button_pressed_ab)
+input.on_button_pressed(Button.AB, pause)
 
-def on_button_pressed_b():
+def up():
     print("Up")
     bird.change(LedSpriteProperty.Y, -1)
-input.on_button_pressed(Button.B, on_button_pressed_b)
+input.on_button_pressed(Button.B, up)
 
-def on_logo_pressed():
+def start():
     global score, bird, empty_obstacle, ticks
     print("Start")
     score = 0
@@ -57,7 +57,7 @@ def on_logo_pressed():
         ticks += 1
         basic.pause(1000)
         score += 1
-input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
+input.on_logo_event(TouchButtonEvent.PRESSED, start)
 
 empty_obstacle = 0
 ticks = 0
