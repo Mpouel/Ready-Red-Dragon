@@ -1,8 +1,16 @@
-input.onButtonPressed(Button.A, function on_button_pressed_a() {
+//  Dragon move down:
+input.onButtonPressed(Button.A, function down() {
     bird.change(LedSpriteProperty.Y, 1)
     console.log("Down")
+    serial.writeLine("Dragon moved to Y=")
 })
-input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
+//  Dragon move up:
+input.onButtonPressed(Button.B, function up() {
+    console.log("Up")
+    bird.change(LedSpriteProperty.Y, -1)
+})
+//  Pause and play the game:
+input.onButtonPressed(Button.AB, function pause() {
     if (game.isPaused()) {
         console.log("Play")
         basic.showLeds(`
@@ -28,11 +36,8 @@ input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
     }
     
 })
-input.onButtonPressed(Button.B, function on_button_pressed_b() {
-    console.log("Up")
-    bird.change(LedSpriteProperty.Y, -1)
-})
-input.onLogoEvent(TouchButtonEvent.Pressed, function on_logo_pressed() {
+//  Start the game:
+input.onLogoEvent(TouchButtonEvent.Pressed, function start() {
     
     console.log("Start")
     score = 0
@@ -68,6 +73,7 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function on_logo_pressed() {
         score += 1
     }
 })
+//  Variables:
 let empty_obstacle = 0
 let ticks = 0
 let score = 0

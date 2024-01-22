@@ -1,8 +1,17 @@
+# Dragon move down:
 def down():
     bird.change(LedSpriteProperty.Y, 1)
     print("Down")
+    serial.write_line("Dragon moved to Y=", LedSpriteProperty.Y)
 input.on_button_pressed(Button.A, down)
 
+# Dragon move up:
+def up():
+    print("Up")
+    bird.change(LedSpriteProperty.Y, -1)
+input.on_button_pressed(Button.B, up)
+
+# Pause and play the game:
 def pause():
     if game.is_paused():
         print("Play")
@@ -28,11 +37,7 @@ def pause():
             """)
 input.on_button_pressed(Button.AB, pause)
 
-def up():
-    print("Up")
-    bird.change(LedSpriteProperty.Y, -1)
-input.on_button_pressed(Button.B, up)
-
+# Start the game:
 def start():
     global score, bird, empty_obstacle, ticks
     print("Start")
@@ -59,6 +64,7 @@ def start():
         score += 1
 input.on_logo_event(TouchButtonEvent.PRESSED, start)
 
+# Variables:
 empty_obstacle = 0
 ticks = 0
 score = 0
