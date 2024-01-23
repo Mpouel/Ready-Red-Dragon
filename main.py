@@ -1,15 +1,10 @@
 # Dragon move down:
 def down():
     bird.change(LedSpriteProperty.Y, 1)
-    print("Down")
-    serial.write_line("Dragon moved to Y=", LedSpriteProperty.Y)
+    serial.write_line("Dragon moved to Y=")
+    serial.write_number(bird.get(LedSpriteProperty.Y))
+    seri
 input.on_button_pressed(Button.A, down)
-
-# Dragon move up:
-def up():
-    print("Up")
-    bird.change(LedSpriteProperty.Y, -1)
-input.on_button_pressed(Button.B, up)
 
 # Pause and play the game:
 def pause():
@@ -36,6 +31,13 @@ def pause():
             . . . . .
             """)
 input.on_button_pressed(Button.AB, pause)
+
+# Dragon move up:
+def up():
+    bird.change(LedSpriteProperty.Y, -1)
+    serial.write_line("Dragon moved to Y=")
+    serial.write_number(bird.get(LedSpriteProperty.Y))
+input.on_button_pressed(Button.B, up)
 
 # Start the game:
 def start():
@@ -72,3 +74,4 @@ bird: game.LedSprite = None
 obstacles: List[game.LedSprite] = []
 index3 = 0
 obstacles = []
+sprite = 0
