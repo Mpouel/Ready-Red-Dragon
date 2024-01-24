@@ -1,13 +1,16 @@
+serial.writeLine("Program started...")
 //  Dragon move down:
-input.onButtonPressed(Button.A, function on_button_pressed_a() {
+input.onButtonPressed(Button.A, function down() {
     bird.change(LedSpriteProperty.Y, 1)
-    serial.writeLine("Dragon moved to Y=")
+    serial.writeLine("Dragon moved to Y= \n")
     serial.writeNumber(bird.get(LedSpriteProperty.Y))
+    serial.writeLine("\n")
 })
 //  Pause and play the game:
-input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
+input.onButtonPressed(Button.AB, function pause() {
     if (game.isPaused()) {
-        console.log("Play")
+        serial.writeLine("Play")
+        serial.writeLine("\n")
         basic.showLeds(`
             . # . . .
             . # # . .
@@ -19,7 +22,8 @@ input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
         basic.clearScreen()
         game.resume()
     } else {
-        console.log("Pause")
+        serial.writeLine("Pause")
+        serial.writeLine("\n")
         game.pause()
         basic.showLeds(`
             . . . . .
@@ -32,15 +36,17 @@ input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
     
 })
 //  Dragon move up:
-input.onButtonPressed(Button.B, function on_button_pressed_b() {
+input.onButtonPressed(Button.B, function up() {
     bird.change(LedSpriteProperty.Y, -1)
-    serial.writeLine("Dragon moved to Y=")
+    serial.writeLine("Dragon moved to Y= \n")
     serial.writeNumber(bird.get(LedSpriteProperty.Y))
+    serial.writeLine("\n")
 })
 //  Start the game:
-input.onLogoEvent(TouchButtonEvent.Pressed, function on_logo_pressed() {
+input.onLogoEvent(TouchButtonEvent.Pressed, function start() {
     
-    console.log("Start")
+    serial.writeLine("Started the game")
+    serial.writeLine("\n")
     score = 0
     bird = game.createSprite(0, 2)
     for (let index = 0; index < 1e+105; index++) {
@@ -62,8 +68,11 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function on_logo_pressed() {
         
         for (let obstacle2 of obstacles) {
             if (obstacle2.get(LedSpriteProperty.X) == bird.get(LedSpriteProperty.X) && obstacle2.get(LedSpriteProperty.Y) == bird.get(LedSpriteProperty.Y)) {
+                serial.writeLine("Game over :( \n")
+                serial.writeLine("Score: \n")
+                serial.writeNumber(score)
                 game.gameOver()
-                basic.showString("Game over Score")
+                basic.showString("Game over  Score:")
                 basic.showNumber(score)
                 break
             }
@@ -74,6 +83,7 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function on_logo_pressed() {
         score += 1
     }
 })
+//  Variables:
 let empty_obstacle = 0
 let ticks = 0
 let score = 0

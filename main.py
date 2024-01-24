@@ -1,15 +1,18 @@
+serial.write_line("Program started...")
+
 # Dragon move down:
 def down():
     bird.change(LedSpriteProperty.Y, 1)
-    serial.write_line("Dragon moved to Y=")
+    serial.write_line("Dragon moved to Y= \n")
     serial.write_number(bird.get(LedSpriteProperty.Y))
-    seri
+    serial.write_line("\n")
 input.on_button_pressed(Button.A, down)
 
 # Pause and play the game:
 def pause():
     if game.is_paused():
-        print("Play")
+        serial.write_line("Play")
+        serial.write_line("\n")
         basic.show_leds("""
             . # . . .
             . # # . .
@@ -21,7 +24,8 @@ def pause():
         basic.clear_screen()
         game.resume()
     else:
-        print("Pause")
+        serial.write_line("Pause")
+        serial.write_line("\n")
         game.pause()
         basic.show_leds("""
             . . . . .
@@ -35,14 +39,16 @@ input.on_button_pressed(Button.AB, pause)
 # Dragon move up:
 def up():
     bird.change(LedSpriteProperty.Y, -1)
-    serial.write_line("Dragon moved to Y=")
+    serial.write_line("Dragon moved to Y= \n")
     serial.write_number(bird.get(LedSpriteProperty.Y))
+    serial.write_line("\n")
 input.on_button_pressed(Button.B, up)
 
 # Start the game:
 def start():
     global score, bird, empty_obstacle, ticks
-    print("Start")
+    serial.write_line("Started the game")
+    serial.write_line("\n")
     score = 0
     bird = game.create_sprite(0, 2)
     for index in range(1e+105):
@@ -57,8 +63,11 @@ def start():
                     obstacles.append(game.create_sprite(4, index2))
         for obstacle2 in obstacles:
             if obstacle2.get(LedSpriteProperty.X) == bird.get(LedSpriteProperty.X) and obstacle2.get(LedSpriteProperty.Y) == bird.get(LedSpriteProperty.Y):
+                serial.write_line("Game over :( \n")
+                serial.write_line("Score: \n")
+                serial.write_number(score)
                 game.game_over()
-                basic.show_string("Game over Score")
+                basic.show_string("Game over  Score:")
                 basic.show_number(score)
                 break
         ticks += 1
