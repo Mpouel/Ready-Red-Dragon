@@ -1,6 +1,6 @@
 # Dragon move down:
 
-def on_button_pressed_a():
+def on_button_pressed_a(): # Left
     bird.change(LedSpriteProperty.Y, 1)
     serial.write_line("" + ("Dragon moved to Y= \n"))
     serial.write_number(bird.get(LedSpriteProperty.Y))
@@ -9,7 +9,7 @@ input.on_button_pressed(Button.A, on_button_pressed_a)
 
 # Pause and play the game:
 
-def on_button_pressed_ab():
+def on_button_pressed_ab(): # Pause / Play
     if game.is_paused():
         serial.write_line("Play")
         serial.write_line("" + ("\n"))
@@ -38,7 +38,7 @@ input.on_button_pressed(Button.AB, on_button_pressed_ab)
 
 # Dragon move up:
 
-def on_button_pressed_b():
+def on_button_pressed_b(): # Right
     bird.change(LedSpriteProperty.Y, -1)
     serial.write_line("" + ("Dragon moved to Y= \n"))
     serial.write_number(bird.get(LedSpriteProperty.Y))
@@ -47,7 +47,7 @@ input.on_button_pressed(Button.B, on_button_pressed_b)
 
 # Start the game:
 
-def on_logo_pressed():
+def on_logo_pressed(): # Start game
     global score, bird, empty_obstacle, ticks
     serial.write_line("Started the game")
     serial.write_line("" + ("\n"))
